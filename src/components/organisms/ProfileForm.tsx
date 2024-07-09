@@ -1,23 +1,40 @@
 "use client";
 
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect, type FormEvent } from "react";
+import { useAppSelector, useAppDispatch } from "@/lib/redux/store";
 import FormField from "../molecules/FormField";
 import Button from "../atoms/Button";
-import { RootState } from "@/lib/redux/store";
 import { updateProfile } from "@/lib/redux/userSlice";
+import userService from "@/services/userService";
+import authService from "@/services/authService";
 
-const ProfileForm: React.FC = () => {
-  const user = useSelector((state: RootState) => state.user);
-  const [name, setName] = useState(user.name);
-  const [email, setEmail] = useState(user.email);
+const ProfileForm: SLComponent = () => {
+  const user = useAppSelector((state) => state.user);
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState("");
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    if (user) {
+      setName(user.name);
+      setEmail(user.email);
+    }
+  }, [user]);
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    // dispatch(updateProfile({ name, email, password }));
-    alert("Profile updated successfully");
+    const isUpdated = await userService.updateUserProfile({
+      email,
+      name,
+      password,
+    });
+    // Refresh token
+    const isRefresh = await authService.login({ email, password });
+    if (isUpdated && isRefresh) {
+      dispatch(updateProfile({ name, email }));
+      alert("Profile updated successfully");
+    }
   };
 
   return (
@@ -26,18 +43,21 @@ const ProfileForm: React.FC = () => {
       className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
     >
       <FormField
-        label="Name"
-        type="text"
-        name="name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <FormField
         label="Email"
         type="email"
         name="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+        disabled
+        required
+      />
+      <FormField
+        label="Name"
+        type="text"
+        name="name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        required
       />
       <FormField
         label="New Password"
@@ -45,6 +65,7 @@ const ProfileForm: React.FC = () => {
         name="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        required
       />
       <Button type="submit">Update Profile</Button>
     </form>

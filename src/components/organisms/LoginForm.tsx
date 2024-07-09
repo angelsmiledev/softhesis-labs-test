@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/lib/redux/store";
 import { login } from "@/lib/redux/userSlice";
@@ -9,9 +9,9 @@ import Button from "../atoms/Button";
 import authService from "@/services/authService";
 import userService from "@/services/userService";
 
-const LoginForm: React.FC = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const LoginForm: SLComponent = () => {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const dispatch = useAppDispatch();
   const router = useRouter();
 

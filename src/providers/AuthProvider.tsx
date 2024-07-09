@@ -16,6 +16,7 @@ const AuthProvider: SLComponent = ({ children }) => {
       const { email, name, _, exp } = decodeToken(
         `${authService.getAccessToken()}`
       ) as any;
+
       // Check if token is expired
       if (Math.floor(new Date().getTime() / 1000) >= exp) {
         authService.logout();
@@ -24,8 +25,11 @@ const AuthProvider: SLComponent = ({ children }) => {
       } else {
         dispatch(login({ email, name }));
       }
+    } else {
+      dispatch(logout());
+      router.push("/");
     }
-  }, [router]);
+  }, [router, dispatch]);
 
   return <>{children}</>;
 };

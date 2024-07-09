@@ -13,12 +13,12 @@ class UserService {
 
   updateUserProfile = async (user: User) => {
     try {
-      const res = await api.put(`user`, {
+      await api.put(`user`, {
         email: user.email,
         name: user.name,
         password: user.password,
       });
-      return res.data;
+      return true;
     } catch (err) {
       alert(err);
     }
