@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useSelector } from "react-redux";
 import { RootState } from "@/lib/redux/store";
 
-const Header: React.FC = () => {
+const Header: SLComponent = () => {
   const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
 
   return (
