@@ -5,6 +5,7 @@ interface FormFieldProps {
   type: string;
   name: string;
   value: string;
+  required?: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 

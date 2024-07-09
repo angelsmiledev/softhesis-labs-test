@@ -35,6 +35,7 @@ const LoginForm: React.FC = () => {
         name="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+        required
       />
       <FormField
         label="Password"
@@ -42,6 +43,7 @@ const LoginForm: React.FC = () => {
         name="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        required
       />
       <Button type="submit">Login</Button>
     </form>
