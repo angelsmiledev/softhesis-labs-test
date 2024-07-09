@@ -6,16 +6,15 @@ import { useAppDispatch } from "@/lib/redux/store";
 import { login } from "@/lib/redux/userSlice";
 import FormField from "../molecules/FormField";
 import Button from "../atoms/Button";
-import authService from "@/services/authService";
-import userService from "@/services/userService";
+import { authService, userService } from "@/services";
 
-const LoginForm: SLComponent = () => {
+export const LoginForm: SLComponent = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     const isLoggedIn = await authService.login({ email, password });

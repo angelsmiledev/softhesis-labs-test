@@ -1,12 +1,10 @@
-import React from "react";
-
 interface ButtonProps {
   onClick?: () => void;
   type?: "button" | "submit" | "reset";
   children: React.ReactNode;
 }
 
-const Button: React.FC<ButtonProps> = ({
+export const Button: SLComponent<ButtonProps> = ({
   onClick,
   type = "button",
   children,

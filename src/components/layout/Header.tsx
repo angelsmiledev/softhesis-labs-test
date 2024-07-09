@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { useAppSelector, useAppDispatch } from "@/lib/redux/store";
 import { logout } from "@/lib/redux/userSlice";
-import authService from "@/services/authService";
+import { authService } from "@/services";
 
 const Header: SLComponent = () => {
   const dispatch = useAppDispatch();

@@ -5,10 +5,9 @@ import { useAppSelector, useAppDispatch } from "@/lib/redux/store";
 import FormField from "../molecules/FormField";
 import Button from "../atoms/Button";
 import { updateProfile } from "@/lib/redux/userSlice";
-import userService from "@/services/userService";
-import authService from "@/services/authService";
+import { userService, authService } from "@/services";
 
-const ProfileForm: SLComponent = () => {
+export const ProfileForm: SLComponent = () => {
   const user = useAppSelector((state) => state.user);
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");

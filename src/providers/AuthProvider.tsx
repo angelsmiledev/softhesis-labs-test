@@ -7,7 +7,7 @@ import { decodeToken } from "@/lib/jwt";
 import authService from "@/services/authService";
 import { login, logout } from "@/lib/redux/userSlice";
 
-const AuthProvider: SLComponent = ({ children }) => {
+export const AuthProvider: SLComponent = ({ children }) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
 

@@ -25,6 +25,6 @@ class UserService {
   };
 }
 
-const userService = new UserService();
+export const userService = new UserService();
 
 export default userService;

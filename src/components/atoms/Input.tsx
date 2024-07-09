@@ -1,5 +1,3 @@
-import React from "react";
-
 interface InputProps {
   type: string;
   name: string;
@@ -10,7 +8,7 @@ interface InputProps {
   placeholder?: string;
 }
 
-const Input: React.FC<InputProps> = ({
+export const Input: SLComponent<InputProps> = ({
   type,
   name,
   value,
