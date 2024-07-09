@@ -9,7 +9,7 @@ export default class AuthService {
         this.setAccessToken(res.data.accessToken);
       }
     } catch (err) {
-      alert("Invalid Credentials");
+      console.log(err);
     }
   };
 

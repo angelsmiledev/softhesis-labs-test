@@ -10,7 +10,7 @@ export const GET = async (request: NextRequest) => {
   }
   try {
     const user = await getUser(email);
-    if (user) return NextResponse.json({ user });
+    if (user) return NextResponse.json(user);
     else return NextResponse.json({ error: "User not found" }, { status: 404 });
   } catch (err) {
     return NextResponse.json(
