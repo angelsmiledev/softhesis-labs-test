@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { StoreProvider } from "@/lib/redux/store";
+import StoreProvider from "@/providers/StoreProvider";
+import AuthProvider from "@/providers/AuthProvider";
 import Header from "@/components/layout/Header";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -16,8 +17,10 @@ const RootLayout = ({ children }: SLayout) => {
     <html lang="en">
       <body className={inter.className}>
         <StoreProvider>
-          <Header />
-          <main className="container mx-auto mt-8 px-4">{children}</main>
+          <AuthProvider>
+            <Header />
+            <main className="container mx-auto mt-8 px-4">{children}</main>
+          </AuthProvider>
         </StoreProvider>
       </body>
     </html>

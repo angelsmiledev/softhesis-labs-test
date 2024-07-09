@@ -1,26 +1,28 @@
 "use client";
 
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/lib/redux/store";
 import { login } from "@/lib/redux/userSlice";
 import FormField from "../molecules/FormField";
 import Button from "../atoms/Button";
+import authService from "@/services/authService";
+import userService from "@/services/userService";
 
 const LoginForm: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Static check instead of API call
-    if (email === "user@example.com" && password === "password") {
-      dispatch(login({ email, name: "User" }));
+
+    const isLoggedIn = await authService.login({ email, password });
+    if (isLoggedIn) {
+      const { name } = await userService.getUserInfo(email);
+      dispatch(login({ email, name }));
       router.push("/dashboard");
-    } else {
-      alert("Invalid credentials");
     }
   };
 

@@ -2,14 +2,14 @@ import jwt from "jsonwebtoken";
 
 const SECRET_KEY = process.env.JWT_SECRET_KEY || "softhesis-labs";
 
-export function generateToken(email: string): string {
-  return jwt.sign({ email }, SECRET_KEY, { expiresIn: "1h" });
-}
+export const generateToken = (email: string, name: string): string => {
+  return jwt.sign({ email, name }, SECRET_KEY, { expiresIn: "1h" });
+};
 
-export function verifyToken(token: string): { email: string } | null {
+export const decodeToken = (token: string) => {
   try {
-    return jwt.verify(token, SECRET_KEY) as { email: string };
+    return jwt.decode(token);
   } catch (error) {
     return null;
   }
-}
+};

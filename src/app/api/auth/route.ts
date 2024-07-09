@@ -27,7 +27,7 @@ export const POST = async (request: NextRequest) => {
         { status: 401 }
       );
 
-    const accessToken = generateToken(email);
+    const accessToken = generateToken(email, user.name);
     return NextResponse.json({ accessToken });
   } catch (err) {
     return NextResponse.json(

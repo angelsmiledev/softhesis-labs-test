@@ -1,13 +1,13 @@
 import api from "@/lib/axios";
 import type { User } from "@/types/User";
 
-export default class AuthService {
+class UserService {
   getUserInfo = async (email: string) => {
     try {
       const res = await api.get(`user?email=${email}`);
       return res.data;
     } catch (err) {
-      console.log(err);
+      alert(err);
     }
   };
 
@@ -20,7 +20,11 @@ export default class AuthService {
       });
       return res.data;
     } catch (err) {
-      console.log(err);
+      alert(err);
     }
   };
 }
+
+const userService = new UserService();
+
+export default userService;
