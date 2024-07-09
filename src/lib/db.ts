@@ -13,7 +13,6 @@ const openDb = async () => {
 
 export const migrate = async () => {
   const db = await openDb();
-  db.serialize();
   await db.run(
     `
         CREATE TABLE IF NOT EXISTS users (

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { getUser, updateUser } from "@/lib/db";
 
-export async function GET(request: Request) {
+export const GET = async (request: Request) => {
   const { searchParams } = new URL(request.url);
   const email = searchParams.get("email");
 
@@ -15,9 +15,9 @@ export async function GET(request: Request) {
   } else {
     return NextResponse.json({ error: "User not found" }, { status: 404 });
   }
-}
+};
 
-export async function PUT(request: Request) {
+export const PUT = async (request: Request) => {
   const { email, name, password } = await request.json();
 
   if (!email || !name || !password) {
@@ -29,4 +29,4 @@ export async function PUT(request: Request) {
 
   await updateUser(email, name, password);
   return NextResponse.json({ message: "User updated successfully" });
-}
+};

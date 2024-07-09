@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { migrate } from "@/lib/db";
 
-export async function GET() {
+export const GET = async () => {
   try {
     await migrate();
     return NextResponse.json({
@@ -13,4 +13,4 @@ export async function GET() {
       { status: 500 }
     );
   }
-}
+};

@@ -12,7 +12,7 @@ const Header: SLComponent = () => {
     <header className="bg-blue-500 text-white p-4">
       <nav className="container mx-auto flex justify-between">
         <Link href="/" className="text-xl font-bold">
-          My App
+          Softhesis Labs
         </Link>
         <div>
           {isLoggedIn ? (
