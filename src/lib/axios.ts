@@ -4,12 +4,9 @@ import axios, {
   InternalAxiosRequestConfig,
   AxiosResponse,
 } from "axios";
-import { headers } from "next/headers";
-
-const baseURL = headers().get("host") as string;
 
 const api: AxiosInstance = axios.create({
-  baseURL,
+  baseURL: "/api",
   headers: {
     "Content-Type": "application/json",
   },
