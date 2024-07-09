@@ -2,11 +2,13 @@
 
 import React from "react";
 import Link from "next/link";
-import { useSelector } from "react-redux";
-import { RootState } from "@/lib/redux/store";
+import { useAppSelector, useAppDispatch } from "@/lib/redux/store";
+import { logout } from "@/lib/redux/userSlice";
+import authService from "@/services/authService";
 
 const Header: SLComponent = () => {
-  const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
+  const dispatch = useAppDispatch();
+  const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
 
   return (
     <header className="bg-blue-500 text-white p-4">
@@ -20,7 +22,18 @@ const Header: SLComponent = () => {
               <Link href="/dashboard" className="mr-4">
                 Dashboard
               </Link>
-              <Link href="/profile">Profile</Link>
+              <Link href="/profile" className="mr-4">
+                Profile
+              </Link>
+              <Link
+                href="/"
+                onClick={() => {
+                  dispatch(logout());
+                  authService.logout();
+                }}
+              >
+                Logout
+              </Link>
             </>
           ) : (
             <Link href="/login">Login</Link>
